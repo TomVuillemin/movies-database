@@ -4,12 +4,14 @@ import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PRIVATE;
 
 import com.tom.algoliamoviesbackend.model.Movie;
+import com.tom.algoliamoviesbackend.service.MoviesService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,29 +27,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor(access = PACKAGE)
 public class MoviesController {
 
+    private final MoviesService moviesService;
+
+
     @PostMapping("/")
     void addMovie(@RequestBody Movie newMovie) {
-        // return userService.createUser(newUser);
+        moviesService.addMovie(newMovie);    
     }
 
     @PutMapping("/{id}")
-    void updateMovie(@RequestBody Movie updatedMovie) {
-        // return userService.createUser(newUser);
+    void updateMovie(@PathVariable String id, @RequestBody Movie updatedMovie) {
+        moviesService.updateMovie(updatedMovie);
     }
 
     @DeleteMapping("/{id}")
-    void deleteMovie() {
-        // return userService.createUser(newUser);
+    void deleteMovie(@PathVariable String id) {
+        moviesService.deleteMovie(id);
     }
 
     @GetMapping("/{id}")
-    Movie getMovie() {
-        return null;
+    Movie getMovie(@PathVariable String id) {
+        return moviesService.getMovie(id);
     }
 
     @GetMapping("/")
     Iterable<Movie> getMovies() {
-        return null;
+        return moviesService.getAllMovies();
     }
 
     

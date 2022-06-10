@@ -1,14 +1,13 @@
 package com.tom.algoliamoviesbackend.model;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
-import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,12 +24,17 @@ public class Movie {
     @NotBlank
     private String name;
 
-    @Builder
-    @PersistenceCreator
-    @Jacksonized
-    public Movie(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private List<String> alternativeTitles;
+
+    private int year;
+
+    private String image;
+
+    private String color;
+
+    private int rating;
+
+    //This should probably be using an enum
+    private List<String> genre;
 
 }

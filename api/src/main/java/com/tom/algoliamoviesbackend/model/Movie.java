@@ -18,7 +18,7 @@ public class Movie {
     @Setter(AccessLevel.NONE)
     @Id
     @NotBlank
-    private String id;
+    private String objectID;
 
     @Indexed
     @NotBlank

@@ -3,6 +3,8 @@ package com.tom.algoliamoviesbackend.controller;
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PRIVATE;
 
+import java.util.List;
+
 import com.tom.algoliamoviesbackend.model.Movie;
 import com.tom.algoliamoviesbackend.service.MoviesService;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +53,7 @@ public class MoviesController {
     }
 
     @GetMapping("/")
-    Iterable<Movie> getMovies() {
+    List<Movie> getMovies() {
         return moviesService.getAllMovies();
     }
 

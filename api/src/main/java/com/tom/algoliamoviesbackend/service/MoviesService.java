@@ -1,5 +1,7 @@
 package com.tom.algoliamoviesbackend.service;
 
+import java.util.List;
+
 import com.tom.algoliamoviesbackend.model.Movie;
 import com.tom.algoliamoviesbackend.repository.MoviesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class MoviesService {
         return moviesRepository.findById(id).orElse(null);
     }
 
-    public Iterable<Movie> getAllMovies() {
+    public List<Movie> getAllMovies() {
         return moviesRepository.findAll();
     }
 }

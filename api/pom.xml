@@ -49,6 +49,11 @@
 			<artifactId>algoliasearch-java-net</artifactId>
 			<version>3.16.5</version>
 		</dependency>
+		  <dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.9</version>
+		</dependency>
 	</dependencies>
 
 	<build>

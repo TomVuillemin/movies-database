@@ -9,7 +9,9 @@ function App() {
   return (
     <div className="App">
       <SearchProvider>
-        <Typography variant="h1">Movies database</Typography>
+        <Typography variant="h1" color={"primary"}>
+          Movies database
+        </Typography>
 
         <Box
           sx={{ mt: 3 }}

@@ -5,8 +5,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import MovieEdition from "./MovieEdition";
-import ImageWithPlaceholder from "../components/ImageWithPlaceholder";
+import MovieEdition from "../routes/MovieEdition";
+import ImageWithPlaceholder from "./ImageWithPlaceholder";
 import Movie from "../model/Movie";
 
 export default function MoviePreview({ movie }: { movie: Movie }) {

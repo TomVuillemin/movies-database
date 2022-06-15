@@ -11,29 +11,29 @@ import org.springframework.stereotype.Service;
 public class MoviesService {
  
     MoviesRepository moviesRepository;
-    AlgoliaService algoliaService;
+    MoviesIndexingService moviesIndexingService;
 
     @Autowired
-    public MoviesService(MoviesRepository moviesRepository, AlgoliaService algoliaService) {
+    public MoviesService(MoviesRepository moviesRepository, MoviesIndexingService moviesIndexingService) {
         this.moviesRepository = moviesRepository;
-        this.algoliaService = algoliaService;
+        this.moviesIndexingService = moviesIndexingService;
     }
 
     public Movie addMovie(Movie newMovie) {
         Movie savedMovie = moviesRepository.save(newMovie);
-        algoliaService.saveMovie(savedMovie);
+        moviesIndexingService.saveMovie(savedMovie);
         return savedMovie;
     }
 
     public Movie updateMovie(Movie updatedMovie) {
         Movie savedMovie = moviesRepository.save(updatedMovie);
-        algoliaService.updateMovie(savedMovie);
+        moviesIndexingService.updateMovie(savedMovie);
         return savedMovie;
     }
 
     public void deleteMovie(String id) {
         moviesRepository.deleteById(id);
-        algoliaService.deleteMovie(id);
+        moviesIndexingService.deleteMovie(id);
     }
 
     public Movie getMovie(String id) {

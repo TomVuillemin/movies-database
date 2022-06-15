@@ -19,15 +19,18 @@ public class AlgoliaService {
     }
 
     public void saveMovie(Movie movie) {
-        index.saveObject(movie);
+        var resp = index.saveObject(movie);
+        resp.waitTask();
     }
 
     public void updateMovie(Movie movie) {
-        index.partialUpdateObject(movie);
+        var resp = index.partialUpdateObject(movie);
+        resp.waitTask();
     }
 
     public void deleteMovie(String id) {
-        index.deleteObject(id);        
+        var resp = index.deleteObject(id);     
+        resp.waitTask();   
     }
 
     

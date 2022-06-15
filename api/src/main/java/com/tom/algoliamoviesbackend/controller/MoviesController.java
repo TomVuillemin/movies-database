@@ -9,7 +9,6 @@ import com.tom.algoliamoviesbackend.model.Movie;
 import com.tom.algoliamoviesbackend.service.MoviesService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Slf4j
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/api/movies")
+@RequestMapping("/api/v1/movies")
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 @RequiredArgsConstructor(access = PACKAGE)
 public class MoviesController {
@@ -33,13 +31,13 @@ public class MoviesController {
 
 
     @PostMapping("/")
-    void addMovie(@RequestBody Movie newMovie) {
-        moviesService.addMovie(newMovie);    
+    Movie addMovie(@RequestBody Movie newMovie) {
+        return moviesService.addMovie(newMovie);    
     }
 
     @PutMapping("/{id}")
-    void updateMovie(@PathVariable String id, @RequestBody Movie updatedMovie) {
-        moviesService.updateMovie(updatedMovie);
+    Movie updateMovie(@PathVariable String id, @RequestBody Movie updatedMovie) {
+        return moviesService.updateMovie(updatedMovie);
     }
 
     @DeleteMapping("/{id}")

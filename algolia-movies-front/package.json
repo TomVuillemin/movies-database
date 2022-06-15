@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-instantsearch-dom": "^6.12.3"
+    "@types/react-instantsearch-dom": "^6.12.3",
+    "prettier": "2.7.0"
   }
 }

@@ -12,10 +12,18 @@ import Movie from "../model/Movie";
 import { PlusOne } from "@mui/icons-material";
 import MoviePreview from "../components/MoviePreview";
 
-const searchClient = algoliasearch(
-  "D4B9WWS9EK",
-  "d2216d0ff431e257158fae27a638ff0e"
-);
+let searchClient: any;
+if (
+  process.env.REACT_APP_ALGOLIA_APPLICATION_ID &&
+  process.env.REACT_APP_ALGOLIA_API_KEY
+) {
+  searchClient = algoliasearch(
+    process.env.REACT_APP_ALGOLIA_APPLICATION_ID,
+    process.env.REACT_APP_ALGOLIA_API_KEY
+  );
+} else {
+  throw new Error("Algolia credentials not found");
+}
 
 function MovieHit({ hit }: { hit: Hit<Movie> }) {
   return <MoviePreview movie={hit} />;

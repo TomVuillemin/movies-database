@@ -1,39 +1,42 @@
 import algoliasearch from "algoliasearch";
-import { useEffect, useState } from "react";
-import { InstantSearch, Hits, SearchBox } from "react-instantsearch-dom";
+import { useContext } from "react";
+import { InstantSearch, SearchBox, InfiniteHits, RefinementList, RatingMenu } from "react-instantsearch-dom";
+import { Box, Fab } from '@mui/material';
+import MoviePreview from './MoviePreview';
+import { SearchContext } from '../contexts/SearchContext';
+import { Hit } from "react-instantsearch-core";
+import Movie from "../model/Movie";
+import { PlusOne } from "@mui/icons-material";
 
 const searchClient = algoliasearch('D4B9WWS9EK', 'd2216d0ff431e257158fae27a638ff0e');
 
-function Hit({ hit }: { hit: any }) {
-  return <div style={{backgroundColor:hit.color}} >
-    {hit.image? <img src={hit.image} alt={`${hit.title}`} />: null}
-    <p>{hit.name}</p></div>;
+function MovieHit({hit}: {hit:Hit<Movie>}) {
+  return <MoviePreview movie={hit} />
 }
 
 export default function Search() {
 
-    const [refresh, setRefresh] = useState(false);
+    const { refresh } = useContext(SearchContext);
 
-    useEffect(() => {
-      if (refresh) {
-        setRefresh(false);
-      }
-    }, [refresh]);
-  
-    const refreshClick = () => {
-      setRefresh(true)
-    }
+    return (        
+        <Box sx={{minWidth:"100%"}}>
+          <Box sx={{mx:20}}>
+            <InstantSearch searchClient={searchClient} indexName="movies" refresh={refresh} >
 
-    return (
-        <div>
-        <InstantSearch searchClient={searchClient} indexName="movies" refresh={refresh} >
-        <SearchBox />
-        <Hits hitComponent={Hit} />
+              <SearchBox autoFocus showLoadingIndicator />
+              <Box >
+                <InfiniteHits hitComponent={MovieHit} />
+              </Box>
+              
   
-      </InstantSearch>
+          </InstantSearch>
   
-      <button onClick={refreshClick}>Refresh</button>
-      </div>
+        </Box>
+        <Fab variant="extended" color="primary" aria-label="add">
+        <PlusOne sx={{ position: "fixed" }} />
+        Extended
+      </Fab>      
+      </Box>
     )
     
 }

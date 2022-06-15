@@ -26,18 +26,16 @@ export default function Search() {
 
   return (
     <Box sx={{ minWidth: "100%" }}>
-      <Box sx={{ mx: 20 }}>
-        <InstantSearch
-          searchClient={searchClient}
-          indexName="movies"
-          refresh={refresh}
-        >
-          <SearchBox autoFocus showLoadingIndicator />
-          <Box>
-            <InfiniteHits hitComponent={MovieHit} />
-          </Box>
-        </InstantSearch>
-      </Box>
+      <InstantSearch
+        searchClient={searchClient}
+        indexName="movies"
+        refresh={refresh}
+      >
+        <SearchBox autoFocus showLoadingIndicator />
+        <Box>
+          <InfiniteHits hitComponent={MovieHit} />
+        </Box>
+      </InstantSearch>
       <Fab variant="extended" color="primary" aria-label="add">
         <PlusOne sx={{ position: "fixed" }} />
         Extended

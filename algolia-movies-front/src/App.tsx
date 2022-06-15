@@ -13,12 +13,7 @@ function App() {
           Movies database
         </Typography>
 
-        <Box
-          sx={{ mt: 3 }}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
+        <Box display="flex" justifyContent="center" alignItems="center">
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Search />} />

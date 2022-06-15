@@ -91,7 +91,7 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
             />
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={6} md={4}>
             <TextField
               fullWidth
               label="year"
@@ -111,7 +111,7 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
               onChange={formik.handleChange}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6} md={4}>
             <TextField
               fullWidth
               label="score"
@@ -123,7 +123,7 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
               type="number"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <TextField
               fullWidth
               label="image url"
@@ -136,7 +136,7 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
             <ImageWithPlaceholder src={formik.values.image} height={300} />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={12} md={4}>
             <FieldArray
               name="alternative_titles"
               render={(arrayHelpers) => (

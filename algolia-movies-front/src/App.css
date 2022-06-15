@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+@media (max-width: 1200px) {
+  .App {
+    max-width: 100%;
+    margin: auto 10px;
+  }
 }
 
 .ais-SearchBox {

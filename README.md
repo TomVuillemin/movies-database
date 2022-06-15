@@ -8,6 +8,8 @@ The backend of the API is built with Spring Boot. The code can be found on the `
 
 The frontend is built with react.
 
+![movies database architecture](https://user-images.githubusercontent.com/6486951/173956984-106cbc63-50e7-4150-8a18-b554dd2e27ad.png)
+
 ## Launch
 
 The easiest way to launch the full setup is using Docker. A docker-compose.yml file is provided that should allow you to launch a working setup.

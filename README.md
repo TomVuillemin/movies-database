@@ -8,7 +8,7 @@ The backend of the API is built with Spring Boot. The code can be found on the `
 
 The frontend is built with react.
 
-![movies database architecture](https://user-images.githubusercontent.com/6486951/173956984-106cbc63-50e7-4150-8a18-b554dd2e27ad.png)
+![movies database architecture](https://user-images.githubusercontent.com/6486951/174092677-70f2698b-2b5e-4a3b-94cf-fbf360d3eddb.png)
 
 ## Launch
 

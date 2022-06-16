@@ -30,7 +30,7 @@ public class MoviesController {
     private final MoviesService moviesService;
 
 
-    @PostMapping("/")
+    @PostMapping
     Movie addMovie(@RequestBody Movie newMovie) {
         return moviesService.addMovie(newMovie);    
     }

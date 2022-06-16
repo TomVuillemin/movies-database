@@ -5,12 +5,13 @@ import {
   SearchBox,
   InfiniteHits,
 } from "react-instantsearch-dom";
-import { Box, Fab } from "@mui/material";
+import { Box, Fab, Button } from "@mui/material";
 import { SearchContext } from "../contexts/SearchContext";
 import { Hit } from "react-instantsearch-core";
 import Movie from "../model/Movie";
-import { PlusOne } from "@mui/icons-material";
+import { PlusOne, Add } from "@mui/icons-material";
 import MoviePreview from "../components/MoviePreview";
+import { Link } from "react-router-dom";
 
 let searchClient: any;
 if (
@@ -34,6 +35,9 @@ export default function Search() {
 
   return (
     <Box sx={{ minWidth: "100%" }}>
+      <Link to="new">
+        <Button startIcon={<Add />}>Add a Movie</Button>
+      </Link>
       <InstantSearch
         searchClient={searchClient}
         indexName="movies"
@@ -44,10 +48,6 @@ export default function Search() {
           <InfiniteHits hitComponent={MovieHit} />
         </Box>
       </InstantSearch>
-      <Fab variant="extended" color="primary" aria-label="add">
-        <PlusOne sx={{ position: "fixed" }} />
-        Extended
-      </Fab>
     </Box>
   );
 }

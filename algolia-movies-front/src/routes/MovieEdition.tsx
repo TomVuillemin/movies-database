@@ -16,13 +16,18 @@ import { SearchContext } from "../contexts/SearchContext";
 import { Delete, DeleteForever, Save } from "@mui/icons-material";
 import ImageWithPlaceholder from "../components/ImageWithPlaceholder";
 import MoviesApiClient from "../MoviesApiClient";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieEdition({ movie }: { movie?: Movie }) {
   const [loading, setLoading] = useState(false);
   const { triggerRefresh } = useContext(SearchContext);
 
+  const isCreation = movie === undefined;
+
+  const navigate = useNavigate();
+
   const deleteMovie = () => {
-    if (movie?.objectID) {
+    if (!isCreation) {
       setLoading(true);
       MoviesApiClient.deleteMovie(movie)
         .then(() => {
@@ -37,6 +42,7 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
         });
     }
   };
+
   const initialMovie = movie || {
     title: "",
     rating: 0,
@@ -53,20 +59,20 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
     validationSchema: movieSchema,
     onSubmit: async (values) => {
       setLoading(true);
-      let apiCall;
-      if (movie) {
-        apiCall = MoviesApiClient.updateMovie;
-      } else {
-        apiCall = MoviesApiClient.createMovie;
-      }
       try {
-        await apiCall(values as Movie);
+        if (isCreation) {
+          await MoviesApiClient.createMovie(values as Movie);
+          triggerRefresh();
+          navigate("/");
+        } else {
+          await MoviesApiClient.updateMovie(values as Movie);
+          triggerRefresh();
+          setLoading(false);
+        }
       } catch (error) {
         //TODO : display snackbar
         console.log("error during call", error);
       }
-      setLoading(false);
-      triggerRefresh();
     },
   });
 
@@ -179,13 +185,15 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
                 <Button type="submit" startIcon={<Save />}>
                   Save
                 </Button>
-                <Button
-                  color="error"
-                  onClick={deleteMovie}
-                  startIcon={<DeleteForever />}
-                >
-                  Delete
-                </Button>
+                {!isCreation && (
+                  <Button
+                    color="error"
+                    onClick={deleteMovie}
+                    startIcon={<DeleteForever />}
+                  >
+                    Delete
+                  </Button>
+                )}
               </>
             )}
           </Grid>

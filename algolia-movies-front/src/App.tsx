@@ -1,27 +1,31 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Search from "./routes/Search";
 import MovieEdition from "./routes/MovieEdition";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { SearchProvider } from "./contexts/SearchContext";
+import { Add } from "@mui/icons-material";
 
 function App() {
   return (
     <div className="App">
-      <SearchProvider>
-        <Typography variant="h1" color={"primary"}>
-          Movies database
-        </Typography>
-
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <BrowserRouter>
+      <BrowserRouter>
+        <SearchProvider>
+          <Box>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Typography variant="h1" color={"primary"}>
+                Movies database
+              </Typography>
+            </Link>
+          </Box>
+          <Box display="flex" justifyContent="center" alignItems="center">
             <Routes>
               <Route path="/" element={<Search />} />
               <Route path="new" element={<MovieEdition />} />
             </Routes>
-          </BrowserRouter>
-        </Box>
-      </SearchProvider>
+          </Box>
+        </SearchProvider>
+      </BrowserRouter>
     </div>
   );
 }

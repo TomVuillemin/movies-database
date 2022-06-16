@@ -1,13 +1,22 @@
 import Movie, { movieSchema } from "../model/Movie";
 import {
   Button,
+  Chip,
   CircularProgress,
   Grid,
   IconButton,
+  MenuItem,
+  OutlinedInput,
   Paper,
   Rating,
+  Select,
   TextField,
   Typography,
+  Box,
+  ListItemText,
+  Checkbox,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 import { FieldArray, FormikProvider, useFormik } from "formik";
 import Add from "@mui/icons-material/Add";
@@ -17,6 +26,7 @@ import { Delete, DeleteForever, Save } from "@mui/icons-material";
 import ImageWithPlaceholder from "../components/ImageWithPlaceholder";
 import MoviesApiClient from "../MoviesApiClient";
 import { useNavigate } from "react-router-dom";
+import GENRES from "../model/GenresEnum";
 
 export default function MovieEdition({ movie }: { movie?: Movie }) {
   const [loading, setLoading] = useState(false);
@@ -98,16 +108,37 @@ export default function MovieEdition({ movie }: { movie?: Movie }) {
           </Grid>
 
           <Grid item xs={6} md={4}>
-            <TextField
-              fullWidth
-              label="year"
-              name="year"
-              value={formik.values.year}
-              onChange={formik.handleChange}
-              error={formik.touched.year && Boolean(formik.errors.year)}
-              helperText={formik.touched.year && formik.errors.year}
-              type="number"
-            />
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <InputLabel id="genres-label">Genre</InputLabel>
+              <Select
+                labelId="genres-label"
+                id="genres"
+                fullWidth
+                multiple
+                value={formik.values.genre}
+                onChange={formik.handleChange}
+                name="genre"
+                input={<OutlinedInput id="genres" label="Genre" />}
+                renderValue={(selected) => (
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    {selected.map((value) => (
+                      <Chip key={value} label={value} />
+                    ))}
+                  </Box>
+                )}
+              >
+                {GENRES.sort().map((genre) => (
+                  <MenuItem key={genre} value={genre}>
+                    <Checkbox
+                      checked={
+                        (formik.values.genre as string[]).indexOf(genre) > -1
+                      }
+                    />
+                    <ListItemText primary={genre} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={4}>
             <Typography component="legend">Rating</Typography>

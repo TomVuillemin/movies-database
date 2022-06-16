@@ -16,7 +16,7 @@ The easiest way to launch the full setup is using Docker. A docker-compose.yml f
 You will need to setup the correct env variables.
 
 1. Edit `.env` files to set the correct values for algolia application keys
-   - Inside the front folder : [.env](./algolia-movies-front/.env)
+   - Inside the front folder : [.env](./algolia-movies-front/.env) : ⚠️ use Search-Only API Key here
    - At the root for the backend : [.env](./.env)
 2. Launch `docker-compose up -d --build` . This will launch the db, the api and the frontend
 3. You should be able to access :
@@ -27,12 +27,16 @@ You will need to setup the correct env variables.
 
 ## Do not block everything until indexing is performed
 
-At the moment, for every modification/creation/delete operation, we wait until the indexing is performed to unblock the UI. This is clearly not the best solution UX-wise and should be improved. One solution would be to perform optimistic update on the frontend to allow the user to keep using the app, and then perform the refresh once the indexing is finished.
+At the moment, for every modification/creation/delete operation, we wait until the indexing is performed to unblock the UI. This is clearly not the best solution UX-wise because indexing can take some time. One solution would be to perform optimistic update on the frontend to allow the user to keep using the app, and then perform the refresh once the indexing is finished.
 
 ## Retrieve Algolia application information from the backend
 
-At the moment, these informations are hardcoded in the frontend and cannot be changed once built. This should be improved and these configurations should be retrieved from the backend.
+At the moment, these informations are hardcoded in the frontend and cannot be changed once built. This should be improved and these configurations could be retrieved from the backend.
 
 ## Adds tests on the backend
 
 The backend does not contain any test. This is something that should be added. Integration tests seems appropriate since we do not have any complex algorithm, but would like to validate the overall behaviour of our api.
+
+## Adds actors to the model
+
+This version does not handle adding actors to a movie. This is something that should be added. A separate collection/repository in mongo would be created to store them, and the interface should allow searching amongst already created actors or adding a new one.

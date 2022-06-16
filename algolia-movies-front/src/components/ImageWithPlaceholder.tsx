@@ -18,7 +18,6 @@ export default function ImageWithPlaceholder({
   useEffect(() => {
     if (!src) {
       setIsLoading(false);
-      setIsError(true);
     } else {
       setIsLoading(true);
       const image = new Image();
